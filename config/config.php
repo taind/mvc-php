@@ -6,7 +6,7 @@ Config::set('languages', array('en', 'vi'));
 
 Config::set('routes',array(
     'default' => '',
-    'admin' => 'admin',
+    'admin' => 'admin_',
 ));
 
 Config::set('default_route', 'default');
