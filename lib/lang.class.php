@@ -8,7 +8,7 @@ class Lang{
         //lấy file path roi check xem thu co thi include khong thi throw exception
         $lang_file_path = ROOT.DS.'lang'.DS.strtolower($lang_code).'.php'; //root/...../htdocs/lang/en.php
         if(file_exists($lang_file_path)){
-            self::$data = include($lang_file_path); //include vào
+            self::$data = include($lang_file_path); //include vao
         }else{
             throw new Exception('Lang file not found: '.$lang_file_path);
         }
