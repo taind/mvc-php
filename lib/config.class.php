@@ -1,7 +1,7 @@
 <?php
 
 class Config{
-
+    //set and get something in an array, i dont know what to do with this
     protected static $settings = array();
 
     public static function get($key){

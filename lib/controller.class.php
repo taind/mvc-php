@@ -5,10 +5,6 @@ class Controller{
     protected $model;
     protected $params;
 
-    /**
-     * Controller constructor.
-     * @param $data
-     */
     public function __construct($data = array())
     {
         $this->data = $data;

@@ -1,5 +1,5 @@
 <?php
-
+//we set something
 Config::set('site_name', 'Viettel Book Store');
 
 Config::set('languages', array('en', 'vi'));

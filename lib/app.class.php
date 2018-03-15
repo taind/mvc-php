@@ -13,8 +13,10 @@ class App{
     public static function run($uri){
         self::$router = new Router($uri); // tao 1 thang router moi
 
-        $controller_class = ucfirst(self::$router->getController()).'Controller'; //return PagesController
-        $controller_method = strtolower(self::$router->getMethodPrefix().self::$router->getAction());//get view/index
+        Lang::load(self::$router->getLanguage());
+
+        $controller_class = ucfirst(self::$router->getController()).'Controller'; //get NameController
+        $controller_method = strtolower(self::$router->getMethodPrefix().self::$router->getAction());//get method
         $controller_object = new $controller_class();        // new PagesController
         if(method_exists($controller_object, $controller_method)){ // coi thu method co trong class khong
             $view_path =  $controller_object->$controller_method();
