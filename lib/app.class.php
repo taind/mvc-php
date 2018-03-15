@@ -10,8 +10,12 @@ class App{
     }
     public static function run($uri){
         self::$router = new Router($uri); // tao 1 thang router moi
+
+        //connect db
         self::$db = new DB(Config::get('db.host'), Config::get('db.username'), Config::get('db.password'), Config::get('db.db_name'));
 
+
+        //language support
         Lang::load(self::$router->getLanguage());
 
         $controller_class = ucfirst(self::$router->getController()).'Controller'; //get NameController
@@ -26,7 +30,7 @@ class App{
         }
 
         $layout = self::$router->getRoute();
-        $layout_path = VIEWS_PATH.DS.$layout.'.html';
+        $layout_path = VIEWS_PATH.DS.$layout.'.php';
         $layout_view_object = new View(compact('content'), $layout_path);
         echo $layout_view_object->render();
     }

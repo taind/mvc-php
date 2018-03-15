@@ -5,7 +5,7 @@ class DB{
 
     public function __construct($host, $user, $password, $db_name)
     {
-        $this->connection = new mysqli($host, $user, $password, $db_name);
+        $this->connection = new mysqli($host, $user, $password, $db_name); //khoi tao connection
 
         if(mysqli_connect_error()){
             throw new Exception('Can not connect to '.$host);
@@ -14,16 +14,16 @@ class DB{
 
     public function query($sql)
     {
-        if (!$this->connection) { //connection ok or not
+        if (!$this->connection) { //connection khong duoc gi thi return ngay
             return false;
         }
-        $result = $this->connection->query($sql); //ok thi query
+        $result = $this->connection->query($sql); //query
 
-        if(mysqli_error($this->connection)){ // query ok or not
+        if(mysqli_error($this->connection)){ // neu co loi thi return thu loi gi
             throw new Exception(mysqli_error($this->connection));
         }
 
-        if(is_bool($result)){ //result is true ?
+        if(is_bool($result)){ //dong query tren co tra ve gia tri khong ?
             return $result;
         }
 
