@@ -10,7 +10,7 @@ class PagesController extends Controller{
 
     public function index()
     {
-        $this->data['pages'] = $this->model->getList();
+        $this->data['page'] = $this->model->getList();
     }
     public function view(){
         $params = App::getRouter()->getParams();
