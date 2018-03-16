@@ -29,7 +29,15 @@
 <div class="container">
 
     <div class="starter-template">
-        <?=$data['content']?>
+        <?php
+            if (Session::hasFlash()){
+        ?>
+                <div class="alert alert-info" role="alert">
+                    <?php Session::flash(); ?>
+                </div>
+        <?php
+            }
+        ?>
     </div>
 
 </div><!-- /.container -->
