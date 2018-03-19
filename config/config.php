@@ -9,7 +9,6 @@ Config::set('routes',array(
     'admin' => 'admin_',
 ));
 
-Session::setFlash('flash message here');
 Config::set('default_route', 'default');
 Config::set('default_language', 'en');
 Config::set('default_controller', 'pages');

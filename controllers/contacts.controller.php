@@ -13,7 +13,7 @@ class ContactsController extends Controller
     {
         if($_POST){
             if($this->model->save($_POST)){
-                Session::flash('Thank you your message has been sent~~');
+                Session::setFlash('Thank you your message has been sent~~');
             }
         }
     }
