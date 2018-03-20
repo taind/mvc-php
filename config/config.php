@@ -21,3 +21,6 @@ Config::set('db.port','3306');
 Config::set('db.username','bookstore');
 Config::set('db.password','123123');
 Config::set('db.db_name','mvc');
+
+//user
+Config::set('salt','hihi123');

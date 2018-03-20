@@ -5,12 +5,12 @@
         <tr>
             <td><?=$da['title']?></td>
             <td align="right"><a href="/admin/pages/edit/<?=$da['id']?>"><button class="btn btn-sm btn-primary">edit</button></a></td>
-            <td align="right"><a href="/admin/pages/delete/<?=$da['id']?>" onclick="confirmDelete();"><button class="btn btn-sm btn-warning">delete</button></a></td>
+            <td align="right"><a href="/admin/pages/delete/<?=$da['id']?>"><button class="del_btn btn btn-sm btn-warning">delete</button></a></td>
         </tr>
     <?php } ?>
 </table>
 <br>
 <div>
-    <a href="/admin/pages/add/<?=$da['id']?>"><button class="btn btn-sm btn-success">New Page</button></a>
+    <a href="/admin/pages/add/"><button class="btn btn-sm btn-success">New Page</button></a>
 
 </div>
