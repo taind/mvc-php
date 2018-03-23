@@ -40,6 +40,32 @@ class UsersController extends Controller{
         $this->data['listUser'] = $this->model->getAllUser();
     }
 
+    public function edit(){
+        if($_POST){
+            $result = $this->model->user_edit($_POST);
+            if(isset($result['error'])){
+                Session::set('error', $result);
+            }else{
+                Session::set('success', 'user updated');
+
+            }
+        }
+
+        if(isset($this->params[0])){
+            if(Session::get('username') !== $this->params[0]){ //neu username dang nhap khong phai username duoc sua thi return
+                Router::redirect('/users/edit/'.Session::get('username'));
+            }// vi vay nen khong can phan quyen them
+            $username = $this->params[0];
+            $this->data['userinfo'] = $this->model->getUserByUsername($username); //show info luc bam edit
+        }
+
+    }
+
+
+
+
+    //////admin section
+
     public function admin_login(){  //admin login
         if((Session::get('username') == 'admin')){
             Router::redirect('/admin/');
@@ -47,7 +73,7 @@ class UsersController extends Controller{
         if(isset($_POST['username']) && isset($_POST['password'])){
             $user = $this->model->getUserByUsername($_POST['username']);
             $hash = md5(Config::get('salt').$_POST['password']);
-            if($user && $user['is_active'] && $hash == $user['password']){
+            if($user && $user['is_active'] && $hash == $user['password'] &&$user['role'] == 'admin'){
                 Session::set('username', $user['username']);
                 Session::set('role', $user['role']);
                 Router::redirect('/admin/');

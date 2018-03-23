@@ -22,7 +22,11 @@
                 <li><a <?php if( App::getRouter()->getController() == 'pages') {?> class="active" <?php } ?> href="/pages/">Pages</a></li>
                 <li><a <?php if( App::getRouter()->getController() == 'contacts') {?> class="active" <?php } ?> href="/contacts/">Contact</a></li>
                 <?php if(Session::get('username')){ ?> //login moi hien nut logout len
+                    <li><a href="/users/">My account</a> </li>
                     <li><a href="/users/logout">Logout</a> </li>
+                <?php } ?>
+                <?php if(!Session::get('username')){ ?> //login moi hien nut logout len
+                    <li><a href="/users">Login</a> </li>
                 <?php } ?>
             </ul>
         </div><!--/.nav-collapse -->

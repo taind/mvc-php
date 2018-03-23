@@ -5,22 +5,15 @@
         </div>
 
         <div class="span8">
-            <h3><?=$data['userinfo']['username']?></h3>
-            <h3><?=$data['userinfo']['username']?></h3>
-            <h3><?=$data['userinfo']['email']?></h3>
+            <h3><?=$data['userinfo']['fullname']?></h3>
+            <h6><?=$data['userinfo']['username']?></h6>
+            <h6><?=$data['userinfo']['email']?></h6>
+            <input type="hidden" name="id" value="<?=$data['userinfo']['id']?>" />
         </div>
-
         <div class="span2">
-            <div class="btn-group">
-                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                    Action
-                    <span class="icon-cog icon-white"></span><span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#"><span class="icon-wrench"></span> Modify</a></li>
-                    <li><a href="#"><span class="icon-trash"></span> Delete</a></li>
-                </ul>
-            </div>
+            <a href="/users/edit/<?=$data['userinfo']['username']?>">
+            <button class="btn btn-success">Edit</button>
         </div>
     </div>
 </div>
+

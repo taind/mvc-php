@@ -38,10 +38,12 @@ class User extends Model{
             $error['username_err'] = 'Username duplicated';
         }
         $password = $this->db->escape($data['password']);
-        $re_password = $this->db->escape($data['re-password']);
+        $re_password = $this->db->escape($data['re-password']); //doan nay check 2 password trung hay khong
         if($password !== $re_password){
             $error['password_err'] = 'Your passwords does not match!';
         }
+
+        //doan nay check role co trong config hay khong
         $role = $this->db->escape($data['role']);
         $error['role_err'] = 'Role not found'; //neu qua vong for ma co user khop se bi se lai null
         foreach(Config::get('account.role') as $da){
@@ -92,6 +94,51 @@ class User extends Model{
         }else{
             //khong thi chi update email va role
             $sql = "UPDATE USERS SET email='{$email}', role='{$role}' where username='{$username}' ";
+        }
+        $result = $this->db->query($sql);
+        return $result;
+    }//end edit function
+
+
+    public function user_edit($data){ //function cho viec user tu edit chinh no
+        $error = array();
+        if( !($data['username']) || !($data['email']) || !($data['cur-password']) || !($data['fullname'])){
+            $error['form_err'] = 'Please fill in all required input field!';
+            $error['error'] = '';
+            return $error; //khac voi add user, edit ma phat hien thieu 1 field la return ngay
+        }
+
+        $fullname = $this->db->escape($data['fullname']);
+        $username = $this->db->escape($data['username']);
+        $email = $this->db->escape($data['email']);
+        if(!$this->getUserByUsername($username)){ //check thu username co trong database khong
+            $error['username_err'] = 'you cant change username'; //khong co thi bao not exist
+            $error['error'] = '';
+            return $error;
+        }
+
+        $tmp = $this->getUserByUsername($username);
+        if(md5(Config::get('salt').$data['cur-password']) !== $tmp['password']){
+            $error['wrong_pass_err'] = 'Wrong password!';
+            $error['error'] = '';
+            return $error;
+        }
+
+
+        if(($data['new-password']) && ($data['re-password'])){ //neu co new password gui len thi moi xu li new password
+            $new_password = $this->db->escape($data['new-password']);
+            $re_password = $this->db->escape($data['re-password']);
+            if($new_password !== $re_password){
+                $error['password_err'] = 'Your passwords does not match!';
+                $error['error'] = '';
+                return $error;
+            }
+            $new_password = Config::get('salt').$new_password;
+            $sql = "UPDATE USERS SET fullname='{$fullname}', password=md5('{$new_password}'), email='{$email}' where username='{$username}' ";
+            // neu co new password thi update new password
+        }else{
+            //khong thi chi update email va fullname
+            $sql = "UPDATE USERS SET fullname='{$fullname}', email='{$email}' where username='{$username}' ";
         }
         $result = $this->db->query($sql);
         return $result;
