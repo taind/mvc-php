@@ -1,4 +1,4 @@
-<h3>Admin Login</h3>
+<h3>User Login</h3>
 <form method="post" action="">
     <div class="form-group">
         <label for="username">Username</label>

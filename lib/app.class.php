@@ -20,10 +20,17 @@ class App{
 
         $controller_class = ucfirst(self::$router->getController()).'Controller'; //get NameController
         $controller_method = strtolower(self::$router->getMethodPrefix().self::$router->getAction());//get method
-
+        //check khong phai login ma vao se bi da ra
         $layout = self::$router->getRoute();
-        if($layout == 'admin' && Session::get('role') != 'admin'){
-            if($controller_method != 'admin_login'){
+
+
+//        if($layout == 'default' && !Session::get('role')){  //neu layout la default, chua dang nhap
+//            if($controller_class == 'UsersController' && $controller_method != 'index'){
+//                Router::redirect('/users/index'); // neu controller la user va khac login page thi route ve trang login
+//            }
+//        }
+        if($layout == 'admin' && Session::get('role') != 'admin'){ // neu layout la admin ma session khong phai admin
+            if($controller_method != 'admin_login'){ // va khong phai trang dang nhap admin thi route ve trang admin
                 Router::redirect('/admin/users/login');
             }
         }

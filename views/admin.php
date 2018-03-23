@@ -21,10 +21,12 @@
 
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a <?php if( App::getRouter()->getController() == 'pages') {?> class="active" <?php } ?> href="/pages/">Pages</a></li>
-                <li><a <?php if( App::getRouter()->getController() == 'contacts') {?> class="active" <?php } ?> href="/contacts/">Contact</a></li>
-                <?php if(Session::get('login')){ ?> //login moi hien nut logout len
+                <li class="active"><a href="/admin/">Home</a></li>
+                <li><a href="/admin/pages/">Pages</a></li>
+                <li><a href="/admin/users/">Users</a></li>
+                <li><a href="/admin/contacts/">Contacts</a></li>
+
+                <?php if(Session::get('username')){ ?> //login moi hien nut logout len
                 <li><a href="/admin/users/logout">Logout</a> </li>
             <?php } ?>
             </ul>
@@ -34,6 +36,11 @@
 </nav>
 
 <div class="container">
+    <?php
+        if(Session::hasFlash()){
+            Session::flash();
+        };
+    ?>
 
     <div class="starter-template">
         <?php

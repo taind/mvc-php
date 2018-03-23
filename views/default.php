@@ -21,6 +21,9 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a <?php if( App::getRouter()->getController() == 'pages') {?> class="active" <?php } ?> href="/pages/">Pages</a></li>
                 <li><a <?php if( App::getRouter()->getController() == 'contacts') {?> class="active" <?php } ?> href="/contacts/">Contact</a></li>
+                <?php if(Session::get('username')){ ?> //login moi hien nut logout len
+                    <li><a href="/users/logout">Logout</a> </li>
+                <?php } ?>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

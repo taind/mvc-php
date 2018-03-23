@@ -26,7 +26,7 @@ class PagesController extends Controller{
     }
 
     public function admin_edit(){
-        if(isset($_POST)){
+        if( array_key_exists('id', $_POST) ){ //neu bien id duoc truyen len trong post
             $id = isset($_POST['id'])? $_POST['id'] : null;
             $result = $this->model->save($_POST,$id);
             if($result){
