@@ -1,4 +1,15 @@
 <h3>Add book</h3>
+<?php
+if((Session::get('error'))){
+    foreach (Session::get('error') as $da){
+        echo $da."<br>";
+    }
+    Session::set('error', null);
+}else if(Session::get('success')){
+    echo Session::get('success');
+    Session::set('success', null);
+}
+?>
 <form method="POST" action="">
     <input type="hidden" name="id" value="" />
     <div class="form-group">

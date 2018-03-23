@@ -61,9 +61,6 @@ class UsersController extends Controller{
 
     }
 
-
-
-
     //////admin section
 
     public function admin_login(){  //admin login
@@ -95,17 +92,18 @@ class UsersController extends Controller{
     public function admin_edit(){
         if($_POST){
             $result = $this->model->edit($_POST);
-
             if(isset($result['error'])){
                 Session::set('error', $result);
             }else{
                 Session::set('success', 'user updated');
-
             }
         }
         if(isset($this->params[0])){
             $id = $this->params[0];
             $this->data['userinfo'] = $this->model->getUserByID($id); //show info luc bam edit
+            if($this->data['userinfo'] == null){
+                Router::redirect('/admin/pages/');
+            }
         }
     }
 

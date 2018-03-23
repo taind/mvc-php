@@ -2,11 +2,8 @@
 
 class Page extends Model{
 
-    public function getAll($only_published = false){
-        $sql = "select * from books where 1";
-        if ($only_published){
-            $sql .= " and is_published = 1";
-        }
+    public function getAll(){
+        $sql = "select * from books";
         return $this->db->query($sql);
     }
 
@@ -24,27 +21,49 @@ class Page extends Model{
         return isset($result[0]) ? $result[0] : null;
     }
 
-    public function save($data, $id=null){
-        if( !isset($data['alias']) || !isset($data['title']) || !isset($data['content']) ){
-            return false;
+    public function save($data){ //save book function
+        if( !($data['title']) || !($data['author']) || !($data['price'])|| !($data['description']) ){
+            $error['form_err'] = 'Please input all field!';
         }
-        $id = intval($id);
-        $alias = $this->db->escape($data['alias']);
         $title = $this->db->escape($data['title']);
-        $content = $this->db->escape($data['content']);
-        $is_published = isset($data['is_published'])? 1:0;
-
-        if(!$id){  //neu id chua co add vao database
-            $sql = "INSERT INTO PAGES VALUES (null, '{$alias}','{$title}','{$content}', {$is_published})";
-        }else{
-            $sql = "UPDATE PAGES SET alias='{$alias}', title='$title', content='{$content}', is_published={$is_published} where id={$id} ";
+        $author = $this->db->escape($data['author']);
+        $description = $this->db->escape($data['description']);
+        $price = $this->db->escape($data['price']);
+        $price = intval($price);
+        if($price < 1000 ){
+            $error['price_err'] = 'Price must be > 1000';
         }
+        if(isset($error['form_err']) || isset($error['price_err'])){
+            $error['error'] = '';
+            return $error;
+        }
+        $sql = "INSERT INTO BOOKS VALUES (null, '{$title}','{$author}', {$price}, '{$description}', 1)";
+        return $this->db->query($sql);
+    }//end save function
+
+    public function edit($data){ //edit book function
+        if( !($data['title']) || !($data['author']) || !($data['price'])|| !($data['description']) ){
+            $error['form_err'] = 'Please input all field!';
+            $error['error'] = '';
+            return $error;
+        }
+        $title = $this->db->escape($data['title']);
+        $author = $this->db->escape($data['author']);
+        $description = $this->db->escape($data['description']);
+        $price = $this->db->escape($data['price']);
+        $price = intval($price);
+        if($price < 1000 ){
+            $error['price_err'] = 'Price must be > 1000';
+            $error['error'] = '';
+            return $error;
+        }
+        $sql = "select * from books";
         return $this->db->query($sql);
     }//end save function
 
     public function delete($id){
         $id = intval($id);
-        $sql = "DELETE FROM PAGES WHERE id = {$id}";
+        $sql = "DELETE FROM BOOKS WHERE id = {$id}";
         return $this->db->query($sql);
     }
 }
