@@ -10,31 +10,43 @@ if((Session::get('error'))){
     Session::set('success', null);
 }
 ?>
-<form method="POST" action="">
-    <input type="hidden" name="id" value="" />
-    <div class="form-group">
-        <label for="fullname">Fullname</label>
-        <input type="text" id="fullname" name="fullname" value="<?=$data['userinfo']['fullname']?>" class="form-control">
+<div class="row">
+    <div class="col-sm-6">
+    <form method="POST" action="" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="" />
+        <div class="form-group">
+            <label for="fullname">Fullname</label>
+            <input type="text" id="fullname" name="fullname" value="<?=$data['userinfo']['fullname']?>" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="<?=$data['userinfo']['username']?>" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="cur-password">Current password</label>
+            <input type="password" id="cur-password" name="cur-password" value="" class="form-control" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="new-password">New password (leave if you dont want to change)</label>
+            <input type="password" id="new-password" name="new-password" value="" class="form-control" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="re-password">Retype new password</label>
+            <input type="password" id="re-password" name="re-password" value="" class="form-control" >
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="text" id="email" name="email" value="<?=$data['userinfo']['email']?>" class="form-control" >
+        </div>
+        <div class="form-group">
+            <label for="image">Your avatar</label>
+            <input type="file" name="image" id="image">
+        </div>
+        <input type="submit" class="btn btn-success">
+    </form>
     </div>
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" value="<?=$data['userinfo']['username']?>" class="form-control">
+    <div class="col-sm-6">
+        <strong>Avatar</strong>
+        <img class="avt-responsive" src="data:<?=$data['userinfo']['img_mime']?>;base64,<?=$data['userinfo']['img_b64']?>">
     </div>
-    <div class="form-group">
-        <label for="cur-password">Current password</label>
-        <input type="password" id="cur-password" name="cur-password" value="" class="form-control" placeholder="">
-    </div>
-    <div class="form-group">
-        <label for="new-password">New password (leave if you dont want to change)</label>
-        <input type="password" id="new-password" name="new-password" value="" class="form-control" placeholder="">
-    </div>
-    <div class="form-group">
-        <label for="re-password">Retype new password</label>
-        <input type="password" id="re-password" name="re-password" value="" class="form-control" >
-    </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input type="text" id="email" name="email" value="<?=$data['userinfo']['email']?>" class="form-control" >
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-</form>
+</div>

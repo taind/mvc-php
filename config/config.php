@@ -30,3 +30,5 @@ Config::set('account.role',array(
     'user',
     'admin',
 ));
+
+//upload base url

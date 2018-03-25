@@ -15,8 +15,8 @@ class PagesController extends Controller{
     public function view(){
         $params = App::getRouter()->getParams();
         if(isset($params[0])){
-            $alias = strtolower($params[0]); //lay param
-            $this->data['page'] = $this->model->getByAlias($alias);
+            $id = intval($params[0]); //lay param
+            $this->data['page'] = $this->model->getById($id);
         }
 
     }
@@ -27,7 +27,7 @@ class PagesController extends Controller{
 
     public function admin_edit(){
         if($_POST){
-            $result = $this->model->edit($_POST);
+            $result = $this->model->edit($_POST, $_FILES);//form data va file image
             if(isset($result['error'])){
                 Session::set('error', $result);
             }else{
@@ -37,9 +37,11 @@ class PagesController extends Controller{
         if(isset($this->params[0])){
             $id = $this->params[0];
             $this->data['bookinfo'] = $this->model->getById($id); //show info luc bam edit
-            if(!$this->data['bookinfo']){ //neu khong co gi thi redirect ve menu
+            if($this->data['bookinfo'] == null){ //neu khong co gi thi redirect ve menu
                 Router::redirect('/admin/pages');
             }
+            $this->data['bookinfo']['img_mime'] = mime_content_type($this->data['bookinfo']['image']); // xu ly anh
+            $this->data['bookinfo']['img_b64'] = base64_encode(file_get_contents($this->data['bookinfo']['image']));
         }
     }
 

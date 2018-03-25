@@ -10,38 +10,47 @@ if((Session::get('error'))){
     Session::set('success', null);
 }
 ?>
+<div class="row">
+    <div class="col-sm-6">
+        <form method="POST" action="">
+            <input type="hidden" name="id" value="" />
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="<?=$data['userinfo']['username']?>" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="new-password">New password</label>
+                <input type="new-password" id="new-password" name="new-password" value="" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="re-password">Retype new password</label>
+                <input type="text" id="re-password" name="re-password" value="" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="text" id="email" name="email" value="<?=$data['userinfo']['email']?>" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                    <?php
+                    if(Session::get('username') == 'admin'){
+                        foreach(Config::get('account.role') as $role){
+                    ?>
+                        <option value="<?=$role?>" <?php if($role === $data['userinfo']['username']){ echo "selected='selected'";} ?> ><?=$role?></option>
+                    <?php    }}
 
-<form method="POST" action="">
-    <input type="hidden" name="id" value="" />
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" value="<?=$data['userinfo']['username']?>" class="form-control">
+                    ?>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-success">
+        </form>
     </div>
-    <div class="form-group">
-        <label for="new-password">New password</label>
-        <input type="new-password" id="new-password" name="new-password" value="" class="form-control" placeholder="">
-    </div>
-    <div class="form-group">
-        <label for="re-password">Retype new password</label>
-        <input type="text" id="re-password" name="re-password" value="" class="form-control" >
-    </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input type="text" id="email" name="email" value="<?=$data['userinfo']['email']?>" class="form-control" >
-    </div>
-    <div class="form-group">
-        <label for="role">Role</label>
-        <select id="role" name="role">
-            <?php
-            if(Session::get('username') == 'admin'){
-                foreach(Config::get('account.role') as $role){
-            ?>
-                <option value="<?=$role?>" <?php if($role === $data['userinfo']['username']){ echo "selected='selected'";} ?> ><?=$role?></option>
-            <?php    }}
-
-            ?>
-        </select>
+    <div class="col-sm-6">
+        <div clas="col-sm-6">
+            <strong>Avatar</strong>
+            <img class="img-responsive" src="data:<?=$data['userinfo']['img_mime']?>;base64,<?=$data['userinfo']['img_b64']?>">
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-</form>
+</div>

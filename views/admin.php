@@ -21,7 +21,7 @@
 
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/admin/">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="/admin/pages/">Pages</a></li>
                 <li><a href="/admin/users/">Users</a></li>
                 <li><a href="/admin/contacts/">Contacts</a></li>
