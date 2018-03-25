@@ -54,7 +54,10 @@ class Router{
             array_shift($path_parts);
         }
         $this->params = $path_parts; //lay mang uri da tach ra gan vao params
+    }
 
+    public function redirect($location){
+        header("Location: $location");
     }
 
 

@@ -1,1 +1,1 @@
-<?php var_dump($data['pages']); ?>
+<?php var_dump($data['page']); ?>

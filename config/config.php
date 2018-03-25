@@ -21,3 +21,14 @@ Config::set('db.port','3306');
 Config::set('db.username','bookstore');
 Config::set('db.password','123123');
 Config::set('db.db_name','mvc');
+
+//userpassword salt
+Config::set('salt','hihi123');
+
+//user role
+Config::set('account.role',array(
+    'user',
+    'admin',
+));
+
+//upload base url
