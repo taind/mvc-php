@@ -50,12 +50,14 @@ form{
     -moz-background-clip: padding;
     border-radius: 60px;
     background-clip: padding-box;
-    margin: 7px 0 0 5px;
+    margin: 0px 20px 0px 0px;
     float: left;
     background-size: cover;
     background-position: center center;
 }
-
+.card-body{
+    margin: 30px;
+}
 
 
 
@@ -69,9 +71,7 @@ body {
     }
 }
 
-.portfolio-item {
-    margin-bottom: 30px;
-}
+
 
 .pagination {
     margin-bottom: 30px;
